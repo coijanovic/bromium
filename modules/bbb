@@ -1,0 +1,18 @@
+#! /bin/bash
+cfile="$HOME/.config/bromium/bbb.csv"
+
+if [ ! -f $cfile ] ; then
+    colored_output -t e -m "No bbb config found. Exiting"
+    exit
+fi
+boardurl="https://i63board.tm.kit.edu/?controller=BoardViewController\&action=show\&project_id=6"
+
+room=$(cat $cfile | cut -d "," -f1 | fzf)
+roomid=$(cat $cfile | grep "$room" | cut -d "," -f2)
+roomurl="https://i62bbb.tm.kit.edu/b/$roomid"
+
+if [ "$room" = "Board Meeting" ] ; then
+    sway exec "chromium-browser --enable-features=UseOzonePlatform --ozone-platform=wayland $boardurl $roomurl"
+else
+    sway exec "chromium-browser --enable-features=UseOzonePlatform --ozone-platform=wayland $roomurl"
+fi
