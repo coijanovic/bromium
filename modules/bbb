@@ -1,4 +1,7 @@
 #! /bin/bash
+# Selects a bbb room and opens it in chromium
+# Put rooms "room id,room url" in ~/.config/bromium/bbb.csv
+
 cfile="$HOME/.config/bromium/bbb.csv"
 
 if [ ! -f $cfile ] ; then
@@ -9,6 +12,10 @@ boardurl="https://i63board.tm.kit.edu/?controller=BoardViewController\&action=sh
 
 room=$(cat $cfile | cut -d "," -f1 | fzf)
 roomurl=$(cat $cfile | grep "$room" | cut -d "," -f2)
+
+if [ "$room" = "" ] ; then
+    exit
+fi
 
 if [ "$room" = "Board Meeting" ] ; then
     sway exec "chromium-browser --enable-features=UseOzonePlatform --ozone-platform=wayland $boardurl $roomurl"

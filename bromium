@@ -1,6 +1,11 @@
 #! /bin/bash
 
 bdir="$HOME/Code/bromium"
-module=$(ls $bdir/modules | fzf)
+
+if [ "$1" = "" ] ; then
+    module=$(ls $bdir/modules | fzf)
+else
+    module=$1
+fi
 $bdir/modules/$module
 exit
