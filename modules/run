@@ -1,0 +1,7 @@
+#! /bin/bash
+
+prg=$(compgen -c | fzf)
+if [ ! "$prg" = "" ] ; then
+    sway exec $prg
+    exit
+fi
