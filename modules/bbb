@@ -8,8 +8,7 @@ fi
 boardurl="https://i63board.tm.kit.edu/?controller=BoardViewController\&action=show\&project_id=6"
 
 room=$(cat $cfile | cut -d "," -f1 | fzf)
-roomid=$(cat $cfile | grep "$room" | cut -d "," -f2)
-roomurl="https://i62bbb.tm.kit.edu/b/$roomid"
+roomurl=$(cat $cfile | grep "$room" | cut -d "," -f2)
 
 if [ "$room" = "Board Meeting" ] ; then
     sway exec "chromium-browser --enable-features=UseOzonePlatform --ozone-platform=wayland $boardurl $roomurl"

@@ -1,0 +1,6 @@
+#! /bin/bash
+
+bdir="$HOME/Code/bromium"
+module=$(ls $bdir/modules | fzf)
+$bdir/modules/$module
+exit
