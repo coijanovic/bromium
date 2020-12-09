@@ -22,3 +22,5 @@ if [ "$room" = "Board Meeting" ] ; then
 else
     sway exec "chromium-browser --enable-features=UseOzonePlatform --ozone-platform=wayland $roomurl"
 fi
+sway for_window [app_id="Chromium-browser"] move workspace 4
+sway workspace 4

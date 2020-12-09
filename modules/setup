@@ -1,0 +1,60 @@
+#! /bin/sh
+
+# This script sets up common programm combinations using sway
+
+# Open all work-related programms and moves them to their assigned workspaces
+work () {
+    colored_output -t i -m "Setting up Work." 
+    dock
+
+    riot_url="https://i62riot.tm.kit.edu"
+    board_url="https://i63board.tm.kit.edu/?controller=BoardViewController\&action=show\&project_id=6#"
+
+    sway exec "firefox-wayland $riot_url $board_url"
+    sway for_window [app_id="firefox"] move workspace 2
+
+    sway exec "thunderbird"
+    sway for_window [class="Thunderbird"] move workspace 3
+    pass KIT/Christoph/Thunderbird | wl-copy
+    colored_output -t i -m "Thunderbird password copied to clipboard."
+
+    sway exec "okular"
+    sway for_window [app_id="okular"] move workspace 6
+
+    sway exec "alacritty --class cmus -e 'cmus'"
+    sway for_window [app_id="cmus"] move workspace 7
+    colored_output -t s -m "Finished."
+
+    sway exec "alacritty --class side"
+    sway exec "alacritty --class main"
+    sway for_window [app_id="side"] resize set 33 ppt
+}
+
+# Open signal
+signal () {
+    colored_output -t i -m "Setting up Signal"
+
+    sway exec "flatpak run org.signal.Signal"
+    sway for_window [class="Signal"] move workspace 8
+    sway workspace 8
+
+    colored_output -t s -m "Finished."
+}
+
+home () {
+    colored_output -t i -m "Setting up Home." 
+
+    dock
+    
+    sway exec "firefox-wayland"
+    sway for_window [app_id="firefox"] move workspace 2
+
+    mount_rhea
+
+    sway exec "alacritty --class main"
+
+    colored_output -t s -m "Finished."
+}
+
+out=$(echo -e "home\nwork" | fzf)
+$out

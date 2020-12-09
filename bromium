@@ -3,7 +3,7 @@
 bdir="$HOME/Code/bromium"
 
 if [ "$1" = "" ] ; then
-    module=$(ls $bdir/modules | fzf)
+    module=$(ls $bdir/modules | fzf --select-1)
 else
     module=$1
 fi

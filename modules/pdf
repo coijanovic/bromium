@@ -1,0 +1,8 @@
+#! /bin/bash
+# Finds a file and opens it in okular if pdf and vim else
+
+f=$(find Projects/ Literature/ -type f -name "*.pdf" | fzf)
+if [ "$f" = "" ] ; then
+    exit
+fi
+sway exec "okular $f"
