@@ -1,0 +1,8 @@
+#! /bin/bash
+# reads user input and queries semantic scholar for it
+
+read -p "Enter search query " query
+sway exec "firefox-wayland 'https://www.semanticscholar.org/search?q=$query&sort=relevance'"
+sway for_window [app_id="firefox"] move workspace 2
+sway for_window [app_id="firefox"] focus
+
