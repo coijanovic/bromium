@@ -5,4 +5,6 @@ f=$(find Projects/ Literature/ -type f -name "*.pdf" | fzf)
 if [ "$f" = "" ] ; then
     exit
 fi
-sway exec "okular $f"
+sway exec "zathura $f"
+sway for_window [app_id="zathura"] move workspace 6
+sway layout tabbed

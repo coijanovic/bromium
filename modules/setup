@@ -13,13 +13,13 @@ work () {
     sway exec "firefox-wayland $riot_url $board_url"
     sway for_window [app_id="firefox"] move workspace 2
 
-    sway exec "thunderbird"
+    sway exec "thunderbird-wayland"
     sway for_window [class="Thunderbird"] move workspace 3
     pass KIT/Christoph/Thunderbird | wl-copy
     colored_output -t i -m "Thunderbird password copied to clipboard."
 
-    sway exec "okular"
-    sway for_window [app_id="okular"] move workspace 6
+    #sway exec "okular"
+    #sway for_window [app_id="okular"] move workspace 6
 
     sway exec "alacritty --class cmus -e 'cmus'"
     sway for_window [app_id="cmus"] move workspace 7
